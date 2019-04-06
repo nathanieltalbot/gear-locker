@@ -8,8 +8,8 @@ This allows for extensibility as well as for generally cleaner-looking
 code. 
 Documentation can be found here: https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
 '''
-class ClubMember(db.Model):
-    __tablename__ = 'ClubMember'
+class club_member(db.Model):
+    __tablename__ = 'club_member'
 
     id = db.Column(db.Integer(), autoincrement=True, primary_key=True)
     status = db.Column(db.Boolean())
