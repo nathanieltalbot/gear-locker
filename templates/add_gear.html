@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +19,7 @@
             <br>
 
             <div class="row align-items-center justify-content-center">
-                <h1>Add a Member</h1>
+                <h1>Add a gear item</h1>
             </div>
             <br>
 
@@ -28,29 +29,39 @@
                 <div class="form-check">
                     <input class="form-check-input" type="radio" id="trueRadio" name="status" value="True" checked>
 		    <label class="form-check-label" for="trueRadio">
-		    Active
+		    Available
 		    </label>
 		</div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" id="falseRadio" name="status" value="False" checked>
 		    <label class="form-check-label" for="falseRadio">
-		    Inactive
+		    Unavailable
 		    </label>
                 <br>
-	        <br>
                 <div class="name">
                     <label for="name">Name</label>
-                    <input class="form-control" type="text" placeholder="Member Name" id="name" name="name">
+                    <input class="form-control" type="text" placeholder="Gear Item" id="name" name="name">
                 </div>
                 <br>
-                <div class="form-row">
-                    <label for="email">Email</label>
-                    <input class="form-control " type="text" placeholder="Member email" id="email" name="email">
+                <div class="brand">
+                    <label for="brand">Brand</label>
+                    <input class="form-control " type="text" placeholder="Gear brand" id="brand" name="brand">
+                </div>
+                    <br>
+                <div class="condition">
+                    <label for="condition">Condition</label>
+                    <input class="form-control" type="text" placeholder="Item Condition" id="condition"
+                           name="condition">
+                </div>
+                <br>
+                <div class="best_use">
+                    <label for="brand">Best_Use</label>
+                    <input class="form-control " type="text" placeholder="Gear use" id="best_use" name="best_use">
                 </div>
 
                 <br>
                 <button type="submit " class="btn btn-primary " style="float:right ">Submit</button>
-            
+
             </form>
             <br><br>
         </div>
