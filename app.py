@@ -51,5 +51,11 @@ def add_gear():
         except Exception as e:
             return(str(e))
     return render_template("add_gear.html")
+
+#home page
+@app.route("/")
+def home():
+    return render_template("home.html")
+
 if __name__ == '__main__':
     app.run()
