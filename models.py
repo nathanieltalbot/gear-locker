@@ -58,7 +58,7 @@ class gear_item(db.Model):
     
     #used in subclass inheritance
     __mapper_args__  = {
-        'polymorphic_identity':'employee',
+        'polymorphic_identity': 'gear_item',
         'polymorphic_on': type
     }
 
@@ -86,6 +86,7 @@ class Reservations(db.Model):
     member = db.Column(Integer
 '''
 
+
 class sleepingBag(gear_item):
     __tablename__ = 'sleeping_bag'
     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
@@ -96,5 +97,36 @@ class sleepingBag(gear_item):
     insulation = db.Column(db.String())
 
     __mapper_args__ = {
-        'polymorphic_identity': 'engineer',
+        'polymorphic_identity': 'sleeping_bag',
+    }
+
+
+class tent(gear_item):
+    __tablename__ = 'tent'
+    id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
+    capacity = db.Column(db.String())
+    type = db.Column(db.String())
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'tent',
+    }
+
+
+class microspikes(gear_item):
+    __tablename__ = 'tent'
+    id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
+    size = db.Column(db.String())
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'size',
+    }
+
+
+class hiking_poles(gear_item):
+    __tablename__ = 'tent'
+    id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
+    size = db.Column(db.String())
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'size',
     }
