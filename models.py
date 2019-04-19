@@ -78,3 +78,60 @@ class gear_item(db.Model):
 class Reservations(db.Model):
     member = db.Column(Integer
 '''
+
+# class sleepingBag(gear_item):
+#     _tablename_ = 'sleeping_bag'
+#     gear_id = db.Column(db.Integer(), autoincrement=True, primary_key=True)
+#     status = db.Column(db.Boolean())
+#     brand = db.Column(db.String())
+#     name = db.Column(db.String())
+#     condition = db.Column(db.String())
+#     best_use = db.Column(db.String())
+#
+#     gender = db.Column(db.String())
+#     size = db.Column(db.String())
+#     type = db.Column(db.String())
+#     temp_rating = db.Column(db.Integer())
+#     insulation = db.Column(db.String())
+#
+#
+#     def __init__(self, status, brand, name, condition, best_use, gender, size, type, temp_rating, insulation):
+#         self.status = status
+#         self.brand = brand
+#         self.name = name
+#         self.condition = condition
+#         self.best_use = best_use
+#         self.gender = gender
+#         self.size  = size
+#         self.type = type
+#         self.temp_rating = temp_rating
+#         self.insulation = insulation
+#
+#
+#     super().__init__(status, brand, name, condition, best_use)
+#
+#     # overriding default _repr_ method
+#     def __repr__(self):
+#         return 'id:{}'.format(self.id)
+#
+#     # overriding default _str_ method for object which allows printing
+#     def __str__(self):
+#         return 'id: {}\nstatus: {}\nbrand: {}\nname: {}\ncondition: {}\nbest_use:{}'.format(
+#             self.id, self.status, self.brand, self.name, self.condition, self.best_use,
+#         self.gender, self.size, self.type, self.temp_rating, self.insulation)
+#
+#     # potentially useful for JSON usage
+#     def serialize(self):
+#         return {
+#             'gear_id': self.id,
+#             'status': self.status,
+#             'brand': self.brand,
+#             'name': self.name,
+#             'condition': self.condition,
+#             'best_use': self.best_use,
+#             'gender': self.gender,
+#             'size': self.size,
+#             'type': self.type,
+#             'temp_rating': self.temp_rating,
+#             'insulation': self.insulation
+#         }
