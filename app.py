@@ -57,5 +57,19 @@ def add_gear():
 def home():
     return render_template("home.html")
 
+#deleting members/items
+@app.route("/delete", methods=['GET','POST'])
+def delete():
+    if request.method == 'POST':
+        member_id = request.form.get("g_id")
+        try:
+            g_item = db.session.query(gear_item).get(member_id)
+            db.session.delete(g_item)
+            db.session.commit()
+            return "Gear item deleted with id={}".format(member_id)
+        except Exception as e:
+            return(str(e))
+    return render_template("delete.html")
+
 if __name__ == '__main__':
     app.run()
