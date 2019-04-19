@@ -2,6 +2,8 @@ import os
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 
+# from flask_table import Table, Col
+
 app = Flask(__name__)
 
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -70,6 +72,27 @@ def delete():
         except Exception as e:
             return(str(e))
     return render_template("delete.html")
+
+
+# deleting members/items
+@app.route("/view", methods=['GET'])
+def view(search):
+    results = []
+    search_string = search.data['search']
+
+    if search.data['search'] == '':
+        qry = db.session.query(gear_item)
+        results = qry.all()
+
+    if not results:
+        return 'No results found!'
+    else:
+        # display results
+        table = gear_item(results)
+        table.border = True
+        return render_template('results.html', table=table)
+
+
 
 if __name__ == '__main__':
     app.run()
