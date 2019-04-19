@@ -62,7 +62,7 @@ class gear_item(db.Model):
     # used in subclass inheritance
     __mapper_args__ = {
         'polymorphic_identity': 'gear_item',
-        'polymorp hic_on': type
+        'polymorphic_on': type
     }
 
     # overriding default _repr_ method
