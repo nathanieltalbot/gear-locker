@@ -53,15 +53,15 @@ class gear_item(db.Model):
 
     def __init__(self, status, name, brand, condition, best_use):
         self.status = status
-        self.brand = brand
         self.name = name
+        self.brand = brand
         self.condition = condition
         self.best_use = best_use
 
     # used in subclass inheritance
     __mapper_args__ = {
         'polymorphic_identity': 'gear_item',
-        'polymorphic_on': type
+        'polymorphic_on': name
     }
 
     # overriding default _repr_ method
@@ -70,16 +70,16 @@ class gear_item(db.Model):
 
     # overriding default _str_ method for object which allows printing
     def __str__(self):
-        return 'id: {}\nstatus: {}\nbrand: {}\nname: {}\ncondition: {}\nbest_use:{}'.format(
-            self.id, self.status, self.brand, self.name, self.condition, self.best_use)
+        return 'id: {}\nstatus: {}\nname: {}\nbrand: {}\ncondition: {}\nbest_use:{}'.format(
+            self.id, self.status, self.name, self.brand, self.condition, self.best_use)
 
     # potentially useful for JSON usage
     def serialize(self):
         return {
             'gear_id': self.id,
             'status': self.status,
-            'brand': self.brand,
             'name': self.name,
+            'brand': self.brand,
             'condition': self.condition,
             'best_use':self.best_use
         }
