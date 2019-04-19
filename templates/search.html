@@ -18,13 +18,21 @@
             <br>
 
             <div class="row align-items-center justify-content-center">
-                <h1>Member Info</h1>
+                <h1>Search for a Member</h1>
             </div>
             <br>
-            <p>ID: {{member_obj.id}}</p>
-            <p>Name: {{member_obj.name}}</p>
-            <p>Email: {{member_obj.email}}</p>
-            <p>Active Member?: {{member_obj.status}}</p>
+
+            <form method="POST">
+
+                <div class="member_id">
+                    <label for="member_id">Member ID</label>
+                    <input class="form-control" type="text" placeholder="Member ID" id="member_id" name="member_id">
+                </div>
+                <br>
+                <br>
+                <button type="submit " class="btn btn-primary " style="float:right ">Submit</button>
+                </div>
+            </form>
             <br><br>
         </div>
     </div>

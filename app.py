@@ -74,23 +74,21 @@ def delete():
     return render_template("delete.html")
 
 
-# deleting members/items
-@app.route("/view", methods=['GET'])
-def view(search):
-    results = []
-    search_string = search.data['search']
-
-    if search.data['search'] == '':
-        qry = db.session.query(gear_item)
-        results = qry.all()
-
-    if not results:
-        return 'No results found!'
-    else:
+# finding info on members/items
+@app.route("/view", methods=['GET', 'POST'])
+def view():
+    if request.method == 'POST':
+        
+        member_id = request.form.get("member_id")
+        try:
+            member = db.session.query(club_member).get(member_id)
+        except Exception as e:
+            return(str(e))
+        
         # display results
-        table = gear_item(results)
-        table.border = True
-        return render_template('results.html', table=table)
+        return render_template('results.html', member_obj=member)
+    
+    return render_template('search.html')
 
 
 
