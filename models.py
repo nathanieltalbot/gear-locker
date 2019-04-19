@@ -46,13 +46,12 @@ class gear_item(db.Model):
 
     gear_id = db.Column(db.Integer(), autoincrement=True, primary_key=True)
     status = db.Column(db.Boolean())
-    brand = db.Column(db.String())
     name = db.Column(db.String())
+    brand = db.Column(db.String())
     condition = db.Column(db.String())
     best_use = db.Column(db.String())
-    type = db.Column(db.String())
 
-    def __init__(self, status, brand, name, condition, best_use):
+    def __init__(self, status, name, brand, condition, best_use):
         self.status = status
         self.brand = brand
         self.name = name
