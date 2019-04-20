@@ -56,10 +56,11 @@ def add_gear():
             db.session.commit()
             return "Gear added. gear id={}".format(item.gear_id)
         except Exception as e:
-            return(str(e))
+            return str(e)
     return render_template("add_gear.html")
 
-#home page
+
+# home page
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -107,13 +108,16 @@ def reserve():
     if request.method == 'POST':
         member_id = request.form.get("mem_id")
         gear_id = request.form.get("g_id")
-        try:
-            reserved = reservations(member_id=member_id, gear_id=gear_id)
-            db.session.add(reserved)
-            db.session.commit()
-            return "Member with ID {} has reserved gear with ID {}".format(member_id, gear_id)
-        except Exception as e:
-            return str(e)
+        if member_id is not None and gear_id is not None:
+            try:
+                reserved = reservations(member_id=member_id, gear_id=gear_id)
+                db.session.add(reserved)
+                db.session.commit()
+                return "Member with ID {} has reserved gear with ID {}".format(member_id, gear_id)
+            except Exception as e:
+                return str(e)
+        else:
+            return "Please enter valid Gear and Member IDs"
     return render_template("reservations.html")
 
 
