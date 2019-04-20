@@ -69,14 +69,17 @@ def home():
 @app.route("/delete", methods=['GET','POST'])
 def delete():
     if request.method == 'POST':
-        member_id = request.form.get("g_id")
+        gear_id = request.form.get("g_id")
         try:
-            g_item = db.session.query(gear_item).get(member_id)
-            db.session.delete(g_item)
-            db.session.commit()
-            return "Gear item deleted with id={}".format(member_id)
+            g_item = db.session.query(gear_item).get(gear_id)
+            if g_item is not None:
+                db.session.delete(g_item)
+                db.session.commit()
+                return "Gear item deleted with id={}".format(gear_id)
+            else:
+                return "Please enter a valid Gear ID."
         except Exception as e:
-            return(str(e))
+            return str(e)
     return render_template("delete.html")
 
 
