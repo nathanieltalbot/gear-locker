@@ -24,16 +24,16 @@ def add_member():
             status = False
         name = request.form.get('name')
         email = request.form.get('email')
-        if '@' in request.form.get('email') & '.' in request.form.get('email'):
-            try:
-                member = club_member(status=status, name=name, email=email)
+        try:
+            member = club_member(status=status, name=name, email=email)
+            if ("@" in email) and ("." in email):
                 db.session.add(member)
                 db.session.commit()
                 return "Member added. member id={}".format(member.id)
-            except Exception as e:
-                return str(e)
-        else:
-            return "Please enter a valid email address."
+            else:
+                return "Please enter a valid email address."
+        except Exception as e:
+            return str(e)
     return render_template("add_member.html")
 
 
@@ -64,7 +64,8 @@ def add_gear():
 def home():
     return render_template("home.html")
 
-#deleting members/items
+
+# deleting members/items
 @app.route("/delete", methods=['GET','POST'])
 def delete():
     if request.method == 'POST':
@@ -94,20 +95,22 @@ def view():
     
     return render_template('search.html')
 
-#reserving gear
+
+# reserving gear
 @app.route("/reserve", methods=['GET', 'POST'])
 def reserve():
     if request.method == 'POST':
         member_id = request.form.get("mem_id")
         gear_id = request.form.get("g_id")
         try:
-            reserve = reservations(member_id = member_id, gear_id = gear_id)
-            db.session.add(reserve)
+            reserved = reservations(member_id=member_id, gear_id=gear_id)
+            db.session.add(reserved)
             db.session.commit()
             return "Member with ID {} has reserved gear with ID {}".format(member_id, gear_id)
         except Exception as e:
-            return(str(e))
-    return render_template("reservations.html") 
+            return str(e)
+    return render_template("reservations.html")
+
 
 if __name__ == '__main__':
     app.run()
