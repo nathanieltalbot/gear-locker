@@ -26,6 +26,7 @@ def add_member():
         email = request.form.get('email')
         try:
             member = club_member(status=status, name=name, email=email)
+            # Checks if email is of a valid format
             if ("@" in email) and ("." in email):
                 db.session.add(member)
                 db.session.commit()
@@ -73,6 +74,7 @@ def delete():
         gear_id = request.form.get("g_id")
         try:
             g_item = db.session.query(gear_item).get(gear_id)
+            # Checks if a gear item exists with the given ID number
             if g_item is not None:
                 db.session.delete(g_item)
                 db.session.commit()
@@ -93,8 +95,8 @@ def view():
             member = db.session.query(club_member).get(member_id)
         except Exception as e:
             return str(e)
-        
-        # display results
+
+        # display results if member exists with valid ID number
         if member is not None:
             return render_template('results.html', member_obj=member)
         else:
@@ -102,7 +104,7 @@ def view():
     return render_template('search.html')
 
 
-# reserving gear
+# For a member to reserve a gear item
 @app.route("/reserve", methods=['GET', 'POST'])
 def reserve():
     if request.method == 'POST':
@@ -110,14 +112,15 @@ def reserve():
         gear_id = request.form.get("g_id")
         member = db.session.query(club_member).get(member_id)
         item = db.session.query(gear_item).get(gear_id)
-        
-        #testing to see if member and gear are defined
+
+        # testing to see if member and gear are defined
         try: member
         except Exception: member = None
         
         try: item
         except Exception: item = None
 
+        # Different checks to ensure both the gear ID and member ID are valid
         if member == None:
             return "Must be a valid member ID!"
         elif item == None:
@@ -148,7 +151,6 @@ def status():
         else:
             status = False
         member = db.session.query(club_member).get(member_id)
-
         try: member
         except Exception: member = None
 
@@ -159,6 +161,7 @@ def status():
             member.status = status
             return "Member of ID {} updated to {}".format(member_id, status)
     return render_template("status.html")
- 
+
+
 if __name__ == '__main__':
     app.run()
