@@ -130,6 +130,7 @@ def reserve():
             try:
                 reserved = reservations(member_id=member_id, gear_id=gear_id)
                 db.session.add(reserved)
+                item.status = False
                 db.session.commit()
                 return "Member with ID {} has reserved gear with ID {}".format(member_id, gear_id)
             except Exception as e:
