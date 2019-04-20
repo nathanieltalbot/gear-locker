@@ -24,16 +24,16 @@ def add_member():
             status = False
         name = request.form.get('name')
         email = request.form.get('email')
-        if '@' in request.form.get('email') & '.' in request.form.get('email'):
-            try:
-                member = club_member(status=status, name=name, email=email)
+        try:
+            member = club_member(status=status, name=name, email=email)
+            if '@' in email & '.' in email:
                 db.session.add(member)
                 db.session.commit()
                 return "Member added. member id={}".format(member.id)
-            except Exception as e:
-                return str(e)
-        else:
-            return "Please enter a valid email address."
+            else:
+                return "Please enter a valid email address."
+        except Exception as e:
+            return str(e)
     return render_template("add_member.html")
 
 
