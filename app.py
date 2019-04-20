@@ -140,6 +140,7 @@ def reserve():
                 return str(e)
     return render_template("reservations.html")
 
+
 # changing the status of a member
 @app.route("/change_status", methods=['GET', 'POST'])
 def status():
