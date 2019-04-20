@@ -120,7 +120,7 @@ def reserve():
 
         if member == None:
             return "Must be a valid member ID!"
-        elif gear_id == None:
+        elif item == None:
             return "Must be a valid gear ID!"
         elif not member.status:
             return "Member must be an active member!"
@@ -136,6 +136,28 @@ def reserve():
                 return str(e)
     return render_template("reservations.html")
 
+# changing the status of a member
+@app.route("/change_status", methods=['GET', 'POST'])
+def status():
+    if request.method == 'POST':
+        member_id = request.form.get("mem_id")
+        status = request.form.get('status')
+        if status == "True":
+            status = True
+        else:
+            status = False
+        member = db.session.query(club_member).get(member_id)
 
+        try: member
+        except Exception: member = None
+
+        if member == None:
+            return "Must be a valid member!"
+      
+        else:
+            member.status = status
+            return "Member of ID {} updated to {}".format(member_id, status)
+    return render_template("status.html")
+ 
 if __name__ == '__main__':
     app.run()
