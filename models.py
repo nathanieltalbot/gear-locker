@@ -90,7 +90,10 @@ class reservations(db.Model):
 
     member_id = db.Column(db.Integer(), db.ForeignKey('club_member.id'), primary_key=True)
     gear_id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
-
+    
+    def __init__(self, member_id, gear_id):
+        self.member_id = member_id
+        self.gear_id = gear_id
 
 
 class sleepingBag(gear_item):
