@@ -26,7 +26,7 @@ def add_member():
         email = request.form.get('email')
         try:
             member = club_member(status=status, name=name, email=email)
-            if '@' in email & '.' in email:
+            if '@k' in email & '.' in email:
                 db.session.add(member)
                 db.session.commit()
                 return "Member added. member id={}".format(member.id)
