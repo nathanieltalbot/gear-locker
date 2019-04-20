@@ -23,13 +23,16 @@ def add_member():
             status = False
         name = request.form.get('name')
         email = request.form.get('email')
-        try:
-            member = club_member(status=status, name=name, email=email)
-            db.session.add(member)
-            db.session.commit()
-            return "Member added. member id={}".format(member.id)
-        except Exception as e:
-            return(str(e))
+        if ('@' & '.' in request.form.get('email')):
+            try:
+                member = club_member(status=status, name=name, email=email)
+                db.session.add(member)
+                db.session.commit()
+                return "Member added. member id={}".format(member.id)
+            except Exception as e:
+                return (str(e))
+        else:
+            return 'Please enter a valid email address.'
     return render_template("add_member.html")
 
 #page for adding gear
