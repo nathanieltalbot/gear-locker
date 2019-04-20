@@ -9,7 +9,6 @@ code.
 Documentation can be found here: https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
 '''
 
-
 # Class to represent members of the club
 class club_member(db.Model):
     __tablename__ = 'club_member'
