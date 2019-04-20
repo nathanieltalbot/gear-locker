@@ -109,6 +109,7 @@ class sleepingBag(gear_item):
         'polymorphic_identity': 'sleeping_bag',
     }
 
+#
 # class tent(gear_item):
 #     __tablename__ = 'tent'
 #     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
@@ -120,17 +121,7 @@ class sleepingBag(gear_item):
 #     }
 #
 #
-# class microspikes(gear_item):
-#     __tablename__ = 'tent'
-#     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
-#     size = db.Column(db.String())
-#
-#     __mapper_args__ = {
-#         'polymorphic_identity': 'microspikes',
-#     }
-#
-#
-# class hikingPoles(gear_item):
+# class trekkingPoles(gear_item):
 #     __tablename__ = 'tent'
 #     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
 #
