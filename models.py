@@ -10,6 +10,7 @@ Documentation can be found here: https://docs.sqlalchemy.org/en/latest/orm/tutor
 '''
 
 
+# Class to represent members of the club
 class club_member(db.Model):
     __tablename__ = 'club_member'
 
@@ -18,6 +19,7 @@ class club_member(db.Model):
     name = db.Column(db.String())
     email = db.Column(db.String())
 
+    # initiate the variables
     def __init__(self, status, name, email):
         self.status = status
         self.name = name
@@ -41,6 +43,7 @@ class club_member(db.Model):
         }
 
 
+# To represent a gear item in the gear locker
 class gear_item(db.Model):
     _tablename_ = 'gear_item'
 
@@ -51,6 +54,7 @@ class gear_item(db.Model):
     condition = db.Column(db.String())
     best_use = db.Column(db.String())
 
+    # initiates the variables
     def __init__(self, status, name, brand, condition, best_use):
         self.status = status
         self.name = name
@@ -85,18 +89,20 @@ class gear_item(db.Model):
         }
 
 
-# representing a reserved gear item
+# representing a reserved gear item and the member who has the item reserved
 class reservations(db.Model):
     __tablename__ = 'reservations'
 
     member_id = db.Column(db.Integer(), db.ForeignKey('club_member.id'), primary_key=True)
     gear_id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
-    
+
+    # initiates the variables
     def __init__(self, member_id, gear_id):
         self.member_id = member_id
         self.gear_id = gear_id
 
 
+# To represent a sleeping bag
 class sleepingBag(gear_item):
     __tablename__ = 'sleeping_bag'
     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
@@ -110,7 +116,7 @@ class sleepingBag(gear_item):
         'polymorphic_identity': 'sleeping_bag',
     }
 
-#
+# Additional subclasses to add in the future for other gear items
 # class tent(gear_item):
 #     __tablename__ = 'tent'
 #     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
