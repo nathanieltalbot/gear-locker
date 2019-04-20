@@ -91,11 +91,13 @@ def view():
         try:
             member = db.session.query(club_member).get(member_id)
         except Exception as e:
-            return(str(e))
+            return str(e)
         
         # display results
-        return render_template('results.html', member_obj=member)
-    
+        if member is not None:
+            return render_template('results.html', member_obj=member)
+        else:
+            return "Please enter a valid Member ID."
     return render_template('search.html')
 
 

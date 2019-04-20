@@ -84,7 +84,8 @@ class gear_item(db.Model):
             'best_use':self.best_use
         }
 
-#representing a reserved gear item
+
+# representing a reserved gear item
 class reservations(db.Model):
     __tablename__ = 'reservations'
 
