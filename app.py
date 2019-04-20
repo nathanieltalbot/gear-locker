@@ -108,8 +108,25 @@ def reserve():
     if request.method == 'POST':
         member_id = request.form.get("mem_id")
         gear_id = request.form.get("g_id")
-        if member_id is not None and gear_id is not None \
-                or member_id is not None or gear_id is not None:
+        member = db.session.query(club_member).get(member_id)
+        item = db.session.query(gear_item).get(gear_id)
+        
+        #testing to see if member and gear are defined
+        try: member
+        except Exception: member = None
+        
+        try: item
+        except Exception: item = None
+
+        if member == None:
+            return "Must be a valid member ID!"
+        elif gear_id == None:
+            return "Must be a valid gear ID!"
+        elif not member.status:
+            return "Member must be an active member!"
+        elif not gear_item.status:
+            return "Gear item must be available!"
+        else:
             try:
                 reserved = reservations(member_id=member_id, gear_id=gear_id)
                 db.session.add(reserved)
@@ -117,8 +134,6 @@ def reserve():
                 return "Member with ID {} has reserved gear with ID {}".format(member_id, gear_id)
             except Exception as e:
                 return str(e)
-        else:
-            return "Please enter valid Gear and Member IDs"
     return render_template("reservations.html")
 
 
