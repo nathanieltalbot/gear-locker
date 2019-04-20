@@ -123,7 +123,7 @@ class sleepingBag(gear_item):
 #     }
 #
 #
-# class hikingPoles(gear_item):
+# class trekkingPoles(gear_item):
 #     __tablename__ = 'tent'
 #     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
 #
