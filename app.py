@@ -64,7 +64,8 @@ def add_gear():
 def home():
     return render_template("home.html")
 
-#deleting members/items
+
+# deleting members/items
 @app.route("/delete", methods=['GET','POST'])
 def delete():
     if request.method == 'POST':
@@ -94,20 +95,22 @@ def view():
     
     return render_template('search.html')
 
-#reserving gear
+
+# reserving gear
 @app.route("/reserve", methods=['GET', 'POST'])
 def reserve():
     if request.method == 'POST':
         member_id = request.form.get("mem_id")
         gear_id = request.form.get("g_id")
         try:
-            reserve = reservations(member_id = member_id, gear_id = gear_id)
-            db.session.add(reserve)
+            reserved = reservations(member_id=member_id, gear_id=gear_id)
+            db.session.add(reserved)
             db.session.commit()
             return "Member with ID {} has reserved gear with ID {}".format(member_id, gear_id)
         except Exception as e:
-            return(str(e))
-    return render_template("reservations.html") 
+            return str(e)
+    return render_template("reservations.html")
+
 
 if __name__ == '__main__':
     app.run()
