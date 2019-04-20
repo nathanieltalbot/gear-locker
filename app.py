@@ -12,18 +12,19 @@ db = SQLAlchemy(app)
 
 from models import club_member, gear_item
 
-#For page for adding members.
+
+# For page for adding members.
 @app.route("/add_member", methods=['GET', 'POST'])
 def add_member():
     if request.method == 'POST':
         status = request.form.get('status')
-        if (status == "True"):
+        if status == "True":
             status = True
         else:
             status = False
         name = request.form.get('name')
         email = request.form.get('email')
-        if '@' & '.' in request.form.get('email'):
+        if '@' in request.form.get('email') & '.' in request.form.get('email'):
             try:
                 member = club_member(status=status, name=name, email=email)
                 db.session.add(member)
@@ -32,15 +33,16 @@ def add_member():
             except Exception as e:
                 return str(e)
         else:
-            return 'Please enter a valid email address.'
+            return "Please enter a valid email address."
     return render_template("add_member.html")
 
-#page for adding gear
+
+# page for adding gear
 @app.route("/add_gear", methods=['GET', 'POST'])
 def add_gear():
     if request.method == 'POST':
         status = request.form.get('status')
-        if (status == "True"):
+        if status == "True":
             status = True
         else:
             status = False
