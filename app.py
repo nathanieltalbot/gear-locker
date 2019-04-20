@@ -108,7 +108,8 @@ def reserve():
     if request.method == 'POST':
         member_id = request.form.get("mem_id")
         gear_id = request.form.get("g_id")
-        if member_id is not None and gear_id is not None:
+        if member_id is not None and gear_id is not None \
+                or member_id is not None or gear_id is not None:
             try:
                 reserved = reservations(member_id=member_id, gear_id=gear_id)
                 db.session.add(reserved)
