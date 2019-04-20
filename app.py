@@ -10,7 +10,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import club_member, gear_item
+from models import club_member, gear_item, reservations
 
 
 # For page for adding members.
@@ -83,7 +83,6 @@ def delete():
 @app.route("/view", methods=['GET', 'POST'])
 def view():
     if request.method == 'POST':
-        
         member_id = request.form.get("member_id")
         try:
             member = db.session.query(club_member).get(member_id)
@@ -95,7 +94,20 @@ def view():
     
     return render_template('search.html')
 
-
+#reserving gear
+@app.route("/reserve", methods=['GET', 'POST'])
+def reserve():
+    if request.method == 'POST':
+        member_id = request.form.get("mem_id")
+        gear_id = request.form.get("g_id")
+        try:
+            reserve = reservations(member_id = member_id, gear_id = gear_id)
+            db.session.add(reserve)
+            db.session.commit()
+            return "Member with ID {} has reserved gear with ID {}".format(member_id, gear_id)
+        except Exception as e:
+            return(str(e))
+    return render_template("reservations.html") 
 
 if __name__ == '__main__':
     app.run()
