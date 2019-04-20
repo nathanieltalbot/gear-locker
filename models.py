@@ -109,22 +109,22 @@ class sleepingBag(gear_item):
         'polymorphic_identity': 'sleeping_bag',
     }
 
-#
-# class tent(gear_item):
-#     __tablename__ = 'tent'
-#     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
-#     capacity = db.Column(db.String())
-#     type = db.Column(db.String())
-#
-#     __mapper_args__ = {
-#         'polymorphic_identity': 'tent',
-#     }
-#
-#
-# class trekkingPoles(gear_item):
-#     __tablename__ = 'tent'
-#     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
-#
-#     __mapper_args__ = {
-#         'polymorphic_identity': 'hikingPoles',
-#     }
+
+class tent(gear_item):
+    __tablename__ = 'tent'
+    id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
+    capacity = db.Column(db.String())
+    type = db.Column(db.String())
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'tent',
+    }
+
+
+class trekkingPoles(gear_item):
+    __tablename__ = 'tent'
+    id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'hikingPoles',
+    }
