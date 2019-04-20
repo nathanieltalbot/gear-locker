@@ -83,10 +83,14 @@ class gear_item(db.Model):
             'condition': self.condition,
             'best_use':self.best_use
         }
-'''
-class Reservations(db.Model):
-    member = db.Column(Integer
-'''
+
+#representing a reserved gear item
+class reservations(db.Model):
+    __tablename__ = 'reservations'
+
+    member_id = db.Column(db.Integer(), db.ForeignKey('club_member.id'), primary_key=True)
+    gear_id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
+
 
 
 class sleepingBag(gear_item):
