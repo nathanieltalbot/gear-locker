@@ -2,8 +2,6 @@ import os
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-# from flask_table import Table, Col
-
 app = Flask(__name__)
 
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -16,6 +14,7 @@ from models import club_member, gear_item, reservations
 # For page for adding members.
 @app.route("/add_member", methods=['GET', 'POST'])
 def add_member():
+    """Loads content for the add_member page when called by Flask."""
     if request.method == 'POST':
         status = request.form.get('status')
         if status == "True":
@@ -41,6 +40,7 @@ def add_member():
 # page for adding gear
 @app.route("/add_gear", methods=['GET', 'POST'])
 def add_gear():
+    """Loads content for the add_gear page when called by Flask."""
     if request.method == 'POST':
         status = request.form.get('status')
         if status == "True":
@@ -62,14 +62,16 @@ def add_gear():
 
 
 # home page
-@app.route("/")
+@app.route("/")i
 def home():
+    """Loads content for the home page when called by Flask."""
     return render_template("home.html")
 
 
 # deleting members/items
 @app.route("/delete", methods=['GET','POST'])
 def delete():
+    """Loads content for the delete page when called by Flask."""
     if request.method == 'POST':
         gear_id = request.form.get("g_id")
         try:
@@ -89,6 +91,7 @@ def delete():
 # finding info on members/items
 @app.route("/view", methods=['GET', 'POST'])
 def view():
+    """Loads content for the view page when called by Flask."""
     if request.method == 'POST':
         member_id = request.form.get("member_id")
         try:
@@ -107,6 +110,7 @@ def view():
 # For a member to reserve a gear item
 @app.route("/reserve", methods=['GET', 'POST'])
 def reserve():
+    """Loads content for the reserve page when called by Flask."""
     if request.method == 'POST':
         member_id = request.form.get("mem_id")
         gear_id = request.form.get("g_id")
@@ -144,6 +148,7 @@ def reserve():
 # changing the status of a member
 @app.route("/change_status", methods=['GET', 'POST'])
 def status():
+    """Loads content for the change_status page when called by Flask."""
     if request.method == 'POST':
         member_id = request.form.get("mem_id")
         status = request.form.get('status')
