@@ -160,6 +160,7 @@ def status():
       
         else:
             member.status = status
+            db.session.commit()
             return "Member of ID {} updated to {}".format(member_id, status)
     return render_template("status.html")
 
