@@ -12,7 +12,7 @@ Documentation can be found here: https://docs.sqlalchemy.org/en/latest/orm/tutor
 '''
 
 # Representing a member of the club
-class club_member(db.Model):
+class ClubMember(db.Model):
     """Representing a member of the club with identifying attributes."""
 
     __tablename__ = 'club_member'
@@ -39,7 +39,7 @@ class club_member(db.Model):
         """Overriding default __str__ method to return all fields of the club member."""
         return 'id: {}\nstatus: {}\nname: {}\nemail: {}'.format(self.id, self.status, self.name, self.email)
 
-class gear_item(db.Model):
+class GearItem(db.Model):
     """Representing an item of gear available to rent from the gear locker."""
 
     _tablename_ = 'gear_item'
@@ -84,7 +84,7 @@ For more information on these patterns, see:
 https://docs.sqlalchemy.org/en/13/orm/inheritance.html#joined-table-inheritance
 '''
 
-class sleepingBag(gear_item):
+class SleepingBag(GearItem):
     """Subclass of GearItem, contains specific information on a sleeping bag."""
 
     __tablename__ = 'sleeping_bag'
@@ -113,7 +113,7 @@ class sleepingBag(gear_item):
     }
 
 # Representing a tent with specific tent-related attributes
-class tent(gear_item):
+class Tent(GearItem):
     """Representing a tent with specific attributes of capacity and type."""
     __tablename__ = 'tent'
     id = db.Column(db.Integer(), db.ForeignKey('gear_item.gear_id'), primary_key=True)
@@ -130,10 +130,10 @@ class tent(gear_item):
         'polymorphic_identity': 'tent',
     }
 
-class reservations(db.Model):
+class Reservation(db.Model):
     """Representing a gear item reserved by a given member."""
     
-    __tablename__ = 'reservations'
+    __tablename__ = 'reservation'
     
     # The IDs of the member and the gear jointly make up the primary key of the reservation
     member_id = db.Column(db.Integer(), db.ForeignKey('club_member.id'), primary_key=True)

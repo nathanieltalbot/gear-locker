@@ -8,7 +8,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import club_member, gear_item, reservations
+from models import ClubMember, GearItem, Reservation
 
 
 # For page for adding members.
@@ -24,7 +24,7 @@ def add_member():
         name = request.form.get('name')
         email = request.form.get('email')
         try:
-            member = club_member(status=status, name=name, email=email)
+            member = ClubMember(status=status, name=name, email=email)
             # Checks if email is of a valid format
             if ("@" in email) and ("." in email):
                 db.session.add(member)
@@ -52,7 +52,7 @@ def add_gear():
         condition = request.form.get("condition")
         best_use = request.form.get("best_use")
         try:
-            item = gear_item(status=status, brand=brand, name=name, condition=condition, best_use=best_use)
+            item = GearItem(status=status, brand=brand, name=name, condition=condition, best_use=best_use)
             db.session.add(item)
             db.session.commit()
             return "Gear added. gear id={}".format(item.gear_id)
@@ -62,7 +62,7 @@ def add_gear():
 
 
 # home page
-@app.route("/")i
+@app.route("/")
 def home():
     """Loads content for the home page when called by Flask."""
     return render_template("home.html")
@@ -75,7 +75,7 @@ def delete():
     if request.method == 'POST':
         gear_id = request.form.get("g_id")
         try:
-            g_item = db.session.query(gear_item).get(gear_id)
+            g_item = db.session.query(GearItem).get(gear_id)
             # Checks if a gear item exists with the given ID number
             if g_item is not None:
                 db.session.delete(g_item)
@@ -95,7 +95,7 @@ def view():
     if request.method == 'POST':
         member_id = request.form.get("member_id")
         try:
-            member = db.session.query(club_member).get(member_id)
+            member = db.session.query(ClubMember).get(member_id)
         except Exception as e:
             return str(e)
 
@@ -114,8 +114,8 @@ def reserve():
     if request.method == 'POST':
         member_id = request.form.get("mem_id")
         gear_id = request.form.get("g_id")
-        member = db.session.query(club_member).get(member_id)
-        item = db.session.query(gear_item).get(gear_id)
+        member = db.session.query(ClubMember).get(member_id)
+        item = db.session.query(GearItem).get(gear_id)
 
         # testing to see if member and gear are defined
         try: member
@@ -135,7 +135,7 @@ def reserve():
             return "Gear item must be available!"
         else:
             try:
-                reserved = reservations(member_id=member_id, gear_id=gear_id)
+                reserved = Reservation(member_id=member_id, gear_id=gear_id)
                 db.session.add(reserved)
                 item.status = False
                 db.session.commit()
@@ -156,7 +156,9 @@ def status():
             status = True
         else:
             status = False
-        member = db.session.query(club_member).get(member_id)
+        
+        member = db.session.query(ClubMember).get(member_id)
+        
         try: member
         except Exception: member = None
 
@@ -165,6 +167,7 @@ def status():
       
         else:
             member.status = status
+            db.session.commit()
             return "Member of ID {} updated to {}".format(member_id, status)
     return render_template("status.html")
 
