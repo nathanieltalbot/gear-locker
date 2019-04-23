@@ -1,7 +1,7 @@
 # NUHOC Gear Locker
 
 ## Purpose
-The main purpose of this project was to create a working database of gear and members for the [NUHOC](nuhoc.com), the outdoors club at Northeastern University. The club runs a gear locker, renting gear to students with an active membership, and needs to track the membership status of all of the members, as well as the rental and return status of all of its gear. This project, currently in the alpha stage (with a working proof of concept) aims to solve this issue. 
+The main purpose of this project was to create a working database of gear and members for [NUHOC](nuhoc.com), the outdoors club at Northeastern University. The club runs a gear locker, renting gear to students with an active membership, and needs to track the membership status of all of the members, as well as the rental and return status of all of its gear. This project, currently in the alpha stage (with a working proof of concept) aims to solve this issue. 
 
 ## Software used:
 * Python3, mainly with the following libraries:
